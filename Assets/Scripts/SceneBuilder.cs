@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class SceneBuilder : MonoBehaviour
 {
-    [SerializeField] GameObject knife;
-    [SerializeField] Vector3[] pos;
-    GameObject knifeDub;
+    [SerializeField] GameObject[] knife;
 
     private void Awake()
     {
-        System.Random rnd = new System.Random();
-        knifeDub = Instantiate(knife, pos[0], Quaternion.identity);
+        GetKnifes();
         Physics.Simulate(1f);
         Physics.autoSimulation = false;
-        knifeDub.GetComponent<Rigidbody>().AddForce(Vector3.up * 20, ForceMode.VelocityChange);
         Physics.autoSimulation = true;
     }
 
+    void GetKnifes()
+    {
+        System.Random rnd = new System.Random();
+        var i = rnd.Next(3, 4);
+        for (int tmp = 0; tmp < i; tmp++)
+        {
+            knife[rnd.Next(0, knife.Length)].SetActive(true);
+        }
+    }
 }

@@ -6,9 +6,11 @@ public class Knife : MonoBehaviour
 {
     Rigidbody rb;
     [SerializeField] float power;
+    GameObject stump;
 
     void Start()
     {
+        stump = GameObject.FindGameObjectWithTag("Stump");
         rb = GetComponent<Rigidbody>();
         if (transform.tag == "Knife")
         {
@@ -18,9 +20,11 @@ public class Knife : MonoBehaviour
 
     void Update()
     {
+        Vector3 forceVect = new Vector3(stump.transform.position.x, stump.transform.position.y, 5.105f) - transform.position;
+        transform.rotation.SetLookRotation(stump.transform.position);
         if (Input.GetMouseButtonDown(0))
         {
-            rb.AddForce(Vector3.up*power, ForceMode.VelocityChange);
+            rb.AddForce(forceVect*power, ForceMode.VelocityChange);
                 GameManager.preparing = false;
         }
         else
