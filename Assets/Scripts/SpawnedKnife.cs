@@ -22,5 +22,9 @@ public class SpawnedKnife : MonoBehaviour
             Destroy(GetComponent<Rigidbody>());
             Destroy(this);
         }
+        if(collision.collider.tag == "Apple")
+        {
+            Destroy(gameObject);
+        }
     }
 }

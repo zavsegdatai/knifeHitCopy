@@ -15,6 +15,7 @@ public class RotateStump : MonoBehaviour
     void Update()
     {
         transform.Rotate(rotAxis, angle);
+
         if (GameManager.won)
         {
             transform.GetChild(0).gameObject.SetActive(true);

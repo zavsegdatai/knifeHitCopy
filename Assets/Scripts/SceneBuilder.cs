@@ -5,13 +5,13 @@ using UnityEngine;
 public class SceneBuilder : MonoBehaviour
 {
     [SerializeField] GameObject[] knife;
+    [SerializeField] Settings settings;
+    [SerializeField] GameObject[] apple;
 
     private void Awake()
     {
         GetKnifes();
-        Physics.Simulate(1f);
-        Physics.autoSimulation = false;
-        Physics.autoSimulation = true;
+        GetApples();
     }
 
     void GetKnifes()
@@ -23,4 +23,19 @@ public class SceneBuilder : MonoBehaviour
             knife[rnd.Next(0, knife.Length)].SetActive(true);
         }
     }
+
+    void GetApples()
+    {
+        var i = Random.value;
+        if (i < settings.Chance)
+        {
+            System.Random rnd = new System.Random();
+            var amount = rnd.Next(1, 4);
+            for(var a = 0; a < amount; a++)
+            {
+                apple[a].SetActive(true);
+            }
+        }
+    }
+
 }

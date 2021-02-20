@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] int amountOFKnifes;
+    [SerializeField] Settings settings;
     public static int current = 0;
     [SerializeField] GameObject knife;
     public static bool preparing = true;
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         Debug.Log(current + " " + preparing + " fixedKnife " + fixedKnife);
-        if(current < amountOFKnifes & !preparing)
+        if(current < settings.AmountOfKnifes & !preparing)
         {
             StartCoroutine(pause());
             IEnumerator pause()
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
                 Instantiate(knife, new Vector3(5, 0.2f, 5), Quaternion.identity);
             }
         }
-        if(fixedKnife == amountOFKnifes)
+        if(fixedKnife == settings.AmountOfKnifes)
         {
             won = true;
             StartCoroutine(pause());
