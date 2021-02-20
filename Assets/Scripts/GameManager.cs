@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject knife;
     public static bool preparing = true;
     public static int fixedKnife = 0;
+    public static bool won = false;
 
     void Awake()
     {
@@ -31,8 +32,15 @@ public class GameManager : MonoBehaviour
         }
         if(fixedKnife == amountOFKnifes)
         {
+            won = true;
+            StartCoroutine(pause());
             Debug.Log("Won!");
-            SceneManager.LoadScene(2);
+            IEnumerator pause()
+            {
+                yield return new WaitForSeconds(2);
+                won = false;
+                SceneManager.LoadScene(2);
+            }
         }
     }
     
