@@ -37,16 +37,21 @@ public class Knife : MonoBehaviour
     {
         if(collision.collider.tag == "Stump")
         {
+            Vibration.Vibrate(400);
             GameManager.fixedKnife++;
             rb.Sleep();
-            gameObject.transform.parent = collision.gameObject.transform;
+            transform.parent.gameObject.transform.parent = collision.gameObject.transform;
             Destroy(rb);
             Destroy(this);
         }
 
         if(collision.collider.tag == "Knife")
         {
-            GameManager.LoadScene(1);
+            GameManager.LoadScene(2);
+        }
+        if(collision.collider.tag == "Apple")
+        {
+            collision.gameObject.SendMessage("DestroyApple");
         }
     }
 }

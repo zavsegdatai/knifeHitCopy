@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class SpawnedKnife : MonoBehaviour
 {
-
+    RaycastHit hit;
     private void OnEnable()
     {
         var stump = GameObject.FindGameObjectWithTag("Stump");
         Vector3 forceVect = new Vector3(stump.transform.position.x, stump.transform.position.y, 5.105f) - transform.position;
         transform.rotation.SetLookRotation(stump.transform.position);
         GetComponent<Rigidbody>().AddForce(forceVect * 10, ForceMode.VelocityChange);
+        Physics.Raycast(transform.position, forceVect, out hit);
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -18,11 +19,11 @@ public class SpawnedKnife : MonoBehaviour
         {
             transform.tag = "Knife";
             GetComponent<Rigidbody>().Sleep();
-            gameObject.transform.parent = collision.gameObject.transform;
+            transform.parent.gameObject.transform.parent = collision.gameObject.transform;
             Destroy(GetComponent<Rigidbody>());
             Destroy(this);
         }
-        if(collision.collider.tag == "Apple")
+        if (hit.collider.tag == "Apple")
         {
             Destroy(gameObject);
         }

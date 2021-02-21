@@ -14,7 +14,7 @@ public class RotateStump : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(rotAxis, angle);
+        transform.Rotate(rotAxis, Time.deltaTime*angle);
 
         if (GameManager.won)
         {

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     {
         current = 0;
         fixedKnife = 0;
+        Vibration.Init();
     }
 
     void Update()
@@ -37,9 +38,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("Won!");
             IEnumerator pause()
             {
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(1);
                 won = false;
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(1);
             }
         }
     }
