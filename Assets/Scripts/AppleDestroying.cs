@@ -10,6 +10,7 @@ public class AppleDestroying : MonoBehaviour
         if (other.tag == "Knife")
         {
             Settings.applesCount++;
+            Settings.Save();
             Destroy(GetComponent<SphereCollider>());
             var tmp = GetComponentsInChildren<Rigidbody>();
             for (int i = 0; i < tmp.Length; i++)

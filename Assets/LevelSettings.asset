@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e928bb82a0c925f449969f6510321862, type: 3}
   m_Name: LevelSettings
   m_EditorClassIdentifier: 
-  chance: 25
+  chance: 100
   amountOfKnifes: 10
+  lvlToBoss: 4

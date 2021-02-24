@@ -10,6 +10,7 @@ public class Knife : MonoBehaviour
 
     void Start()
     {
+        Vibration.Init();
         stump = GameObject.FindGameObjectWithTag("Stump");
         rb = GetComponent<Rigidbody>();
         if (transform.tag == "Knife")
@@ -24,7 +25,7 @@ public class Knife : MonoBehaviour
         transform.rotation.SetLookRotation(stump.transform.position);
         if (Input.GetMouseButtonDown(0))
         {
-            rb.AddForce(forceVect*power, ForceMode.VelocityChange);
+                rb.AddForce(forceVect * power, ForceMode.VelocityChange);
                 GameManager.preparing = false;
         }
         else
@@ -37,7 +38,7 @@ public class Knife : MonoBehaviour
     {
         if(collision.collider.tag == "Stump")
         {
-            Vibration.Vibrate(400);
+            Vibration.Vibrate(200);
             GameManager.fixedKnife++;
             rb.Sleep();
             transform.parent.gameObject.transform.parent = collision.gameObject.transform;
@@ -47,7 +48,8 @@ public class Knife : MonoBehaviour
 
         if(collision.collider.tag == "Knife")
         {
-            GameManager.LoadScene(2);
+            Settings.Save();
+            Settings.LoadScene(4);
         }
         if(collision.collider.tag == "Apple")
         {

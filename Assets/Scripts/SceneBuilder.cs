@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SceneBuilder : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class SceneBuilder : MonoBehaviour
     private void Awake()
     {
         GetKnifes();
-        GetApples();  
+        GetApples();
     }
 
     void GetKnifes()
