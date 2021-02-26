@@ -13,11 +13,15 @@ public class Settings : ScriptableObject
     [SerializeField] [Range(0, 10)] int amountOfKnifes;
     [Header("Amount of won levels to fight with boss")]
     [SerializeField] [Range(1, 10)] int lvlToBoss;
+    [Header("Pause beetwen throwing knife")]
+    [SerializeField] [Range(0.1f, 0.5f)] float pauseOnSpawn;
     public static int currentLvl = 1;
     public static int applesCount = 0;
     public static int maxLvl = 1;
     static int lvlCounter = 1;
+    public static int maxKnifesFixed = 0;
 
+    public float PauseOnSpawn { get { return pauseOnSpawn; } }
     public int ToBoss { get { return lvlToBoss; } }
     public float Chance { get { return (float) chance/100; } }
     public int AmountOfKnifes { get { return amountOfKnifes; } }
@@ -25,13 +29,15 @@ public class Settings : ScriptableObject
 
     public static void Save()
     {
-      SaveBinary.Save(currentLvl, applesCount);
+        
+      SaveBinary.Save(currentLvl, applesCount, maxKnifesFixed);
     }
 
     public static void Load()
     {
         maxLvl = SaveBinary.Load().maxLvl;
         applesCount = SaveBinary.Load().appleCount;
+        maxKnifesFixed = SaveBinary.Load().maxKnifesFixed;
     }
 
     public static void LoadScene(int index)

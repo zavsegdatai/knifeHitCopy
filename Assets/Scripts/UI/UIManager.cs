@@ -11,7 +11,21 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image[] lvlImg;
     [SerializeField] Settings settings;
     [SerializeField] Color newColor;
+    [SerializeField] GameObject knifesPanel;
+    [SerializeField] List<GameObject> knifes;
 
+    private void Awake()
+    {
+        StartCoroutine(fillKnifes(settings.AmountOfKnifes));
+        IEnumerator fillKnifes(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                yield return new WaitUntil(() => i < amount);
+                knifes[i].SetActive(true);
+            }
+        }
+    }
     private void Start()
     {
         if (settings.LvlCount <= 4)
@@ -22,10 +36,14 @@ public class UIManager : MonoBehaviour
             }
         }
         currentLevel.text = Settings.currentLvl.ToString();
-        record.text = Settings.maxLvl.ToString();
+        
     }
     void Update()
     {
         applesCounter.text = Settings.applesCount.ToString();
+        if(GameManager.fixedKnife > 0)
+            knifes[GameManager.fixedKnife-1].transform.GetChild(1).gameObject.SetActive(false);
+        record.text = GameManager.knifeCounter.ToString();
     }
+
 }

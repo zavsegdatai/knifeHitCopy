@@ -7,6 +7,7 @@ TagManager:
   - Stump
   - Knife
   - Apple
+  - ActiveSprite
   layers:
   - Default
   - TransparentFX

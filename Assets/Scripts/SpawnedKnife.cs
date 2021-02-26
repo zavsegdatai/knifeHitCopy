@@ -7,6 +7,7 @@ public class SpawnedKnife : MonoBehaviour
     RaycastHit hit;
     private void OnEnable()
     {
+        GetComponent<BoxCollider>().enabled = true;
         var stump = GameObject.FindGameObjectWithTag("Stump");
         Vector3 forceVect = new Vector3(stump.transform.position.x, stump.transform.position.y, 5.105f) - transform.position;
         transform.rotation.SetLookRotation(stump.transform.position);

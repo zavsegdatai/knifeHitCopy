@@ -12,6 +12,7 @@ public class AppleDestroying : MonoBehaviour
             Settings.applesCount++;
             Settings.Save();
             Destroy(GetComponent<SphereCollider>());
+            Destroy(GetComponent<Rigidbody>());
             var tmp = GetComponentsInChildren<Rigidbody>();
             for (int i = 0; i < tmp.Length; i++)
             {

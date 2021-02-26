@@ -5,39 +5,42 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 
-public class SaveBinary : MonoBehaviour
+public static class SaveBinary
 {
-    public static void Save(int lvl, int apples)
+    public static void Save(int lvl, int apples, int knifeCount)
     {
-        Data data = new Data();
-        if (Load().maxLvl < lvl)
+        Data data = Load();
+        if (data.maxLvl < lvl)
         {
-            Debug.Log("Update");
+            if (data.maxKnifesFixed < knifeCount)
+            {
+                data.maxKnifesFixed = knifeCount;
+            }
             data.maxLvl = lvl;
-            data.appleCount += (data.appleCount + apples) - data.appleCount;
+            data.appleCount += (apples - data.appleCount);
             BinaryFormatter bf = new BinaryFormatter();
-            using FileStream fs = new FileStream(Application.dataPath + "/data.sv", FileMode.Create);
+            using FileStream fs = new FileStream(Application.persistentDataPath + "/data.sv", FileMode.Create);
             bf.Serialize(fs, data);
-            fs.Close();
         }
-    }
-
-    public static void Save(int apples)
-    {
-        Data data = new Data();
-        data.appleCount += (data.appleCount + apples) - data.appleCount;
-        BinaryFormatter bf = new BinaryFormatter();
-        using FileStream fs = new FileStream(Application.dataPath + "/data.sv", FileMode.Create);
-        bf.Serialize(fs, data);
-        fs.Close();
+        else
+        {
+            if (data.maxKnifesFixed < knifeCount)
+            {
+                data.maxKnifesFixed = knifeCount;
+            }
+            data.appleCount += (apples - data.appleCount);
+            BinaryFormatter bf = new BinaryFormatter();
+            using FileStream fs = new FileStream(Application.persistentDataPath + "/data.sv", FileMode.Create);
+            bf.Serialize(fs, data);
+        }
     }
 
     public static Data Load()
     {
-        if (File.Exists(Application.dataPath + "/data.sv"))
+        if (File.Exists(Application.persistentDataPath + "/data.sv"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            using FileStream fs = new FileStream(Application.dataPath + "/data.sv", FileMode.Open);
+            using FileStream fs = new FileStream(Application.persistentDataPath + "/data.sv", FileMode.Open);
             Data data = (Data)bf.Deserialize(fs);
             fs.Close();
             return data;
@@ -55,5 +58,6 @@ public class SaveBinary : MonoBehaviour
     {
         public int appleCount = 0;
         public int maxLvl = 1;
+        public int maxKnifesFixed = 0;
     }
 }

@@ -25,7 +25,7 @@ BoxCollider:
   m_GameObject: {fileID: 8677899916345484698}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.0019215724, y: 0.010897745, z: 0.00022541694}
   m_Center: {x: -0.0000127436215, y: -0.0043993355, z: 0}
@@ -41,6 +41,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1503091a3cccf664d9e672bc2768e0fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: 5a1e5ec791efc7341847cba53d7e0973, type: 2}
   power: 20
 --- !u!1 &9060065304393031207
 GameObject:
