@@ -9,7 +9,7 @@ public static class Notifications
 {
     static int hoursToSendNotification = 8;
     
-    public static void GetNotification()
+     static AndroidNotification GetNotification()
     {
         var not = new AndroidNotificationChannel()
         {
@@ -27,17 +27,16 @@ public static class Notifications
         notification.Text = "Вас давно не было в игре, мы соскучились!";
         notification.FireTime = System.DateTime.Now.AddHours(hoursToSendNotification);
 
-        if (PlayerPrefs.HasKey("TimeOnExit"))
-        {
-            System.TimeSpan timePassed = System.DateTime.Now - System.DateTime.ParseExact(PlayerPrefs.GetString("TimeOnExit"), "u", CultureInfo.InvariantCulture); //получаем разницу между настоящим временем и последним запуском
-            if (timePassed.Hours > hoursToSendNotification)
-            {
-                AndroidNotificationCenter.SendNotification(notification, "channel_id");
-            }
-            else
-            {
-                AndroidNotificationCenter.CancelNotification(notification.Number);
-            }
-        }
+        return notification;
+    }
+
+    public static void SendNotification()
+    {
+        AndroidNotificationCenter.SendNotification(GetNotification(), "channel_id");
+    }
+
+    public static void CancelNotification()
+    {
+        AndroidNotificationCenter.CancelNotification(GetNotification().Number);
     }
 }

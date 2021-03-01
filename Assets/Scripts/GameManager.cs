@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        Notifications.CancelNotification();
         preparing = true;
         current = 0;
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
@@ -85,7 +86,7 @@ public class GameManager : MonoBehaviour
     private void OnApplicationPause(bool pause)
     {
         PlayerPrefs.SetString("TimeOnExit", System.DateTime.Now.ToString("u", CultureInfo.InvariantCulture));
-        Notifications.GetNotification();
+        Notifications.SendNotification();
     }
 
 }
