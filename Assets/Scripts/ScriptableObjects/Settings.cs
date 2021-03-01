@@ -25,7 +25,7 @@ public class Settings : ScriptableObject
     public int ToBoss { get { return lvlToBoss; } }
     public float Chance { get { return (float) chance/100; } }
     public int AmountOfKnifes { get { return amountOfKnifes; } }
-    public int LvlCount { get { return Mathf.Clamp(lvlCounter, 1, lvlToBoss); } set { lvlCounter = Mathf.Clamp(value, 1, lvlToBoss); } }
+    public int LvlCount { get { return Mathf.Clamp(lvlCounter, 0, lvlToBoss); } set { lvlCounter = Mathf.Clamp(value, 0, lvlToBoss); } }
 
     public static void Save()
     {
@@ -43,5 +43,10 @@ public class Settings : ScriptableObject
     public static void LoadScene(int index)
     {
         SceneManager.LoadScene(index);
+    }
+
+    public static void Exit()
+    {
+        Application.Quit();
     }
 }

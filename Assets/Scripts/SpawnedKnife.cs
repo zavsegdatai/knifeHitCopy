@@ -13,6 +13,10 @@ public class SpawnedKnife : MonoBehaviour
         transform.rotation.SetLookRotation(stump.transform.position);
         GetComponent<Rigidbody>().AddForce(forceVect * 10, ForceMode.VelocityChange);
         Physics.Raycast(transform.position, forceVect, out hit);
+        if (hit.collider.tag == "Apple")
+        {
+            Destroy(gameObject);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,10 +27,6 @@ public class SpawnedKnife : MonoBehaviour
             transform.parent.gameObject.transform.parent = collision.gameObject.transform;
             Destroy(GetComponent<Rigidbody>());
             Destroy(this);
-        }
-        if (hit.collider.tag == "Apple")
-        {
-            Destroy(gameObject);
         }
     }
 }

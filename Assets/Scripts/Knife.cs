@@ -7,6 +7,7 @@ public class Knife : MonoBehaviour
     Rigidbody rb;
     [SerializeField] Settings settings;
     [SerializeField] float power;
+    [SerializeField] ParticleSystem particles;
     GameObject stump;
 
     private void Awake()
@@ -30,6 +31,7 @@ public class Knife : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
+                GetComponentInParent<AudioSource>().Play();
                 GameManager.preparing = false;
                 rb.AddForce(forceVect * power, ForceMode.VelocityChange);
                 GetComponent<BoxCollider>().enabled = true;
@@ -43,14 +45,17 @@ public class Knife : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.tag == "Stump")
+
+        if (collision.collider.tag == "Stump")
         {
+            particles.Play();
             Vibration.Vibrate(100);
             GameManager.fixedKnife++;
             rb.Sleep();
             transform.parent.gameObject.transform.parent = collision.gameObject.transform;
             GameManager.knifeCounter++;
             Destroy(rb);
+            collision.collider.GetComponent<AudioSource>().Play();
             Destroy(this);
         }
 

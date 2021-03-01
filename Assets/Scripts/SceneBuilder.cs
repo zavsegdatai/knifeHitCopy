@@ -8,8 +8,8 @@ public class SceneBuilder : MonoBehaviour
     [SerializeField] Settings settings;
     [SerializeField] List <GameObject> apples;
     [SerializeField] List<GameObject> knifes;
-    [SerializeField]int knifesCount;
-    [SerializeField]int applesCount;
+    int knifesCount;
+    int applesCount;
 
     private void Awake()
     {
